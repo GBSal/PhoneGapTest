@@ -6,6 +6,10 @@ function HomeCtrl($scope,navSvc,$rootScope) {
     $scope.slidePage = function (path,type) {
         navSvc.slidePage(path,type);
     };
+    $scope.slideHome = function (path,type) {
+    	navSvc.deleteHistory();
+        navSvc.slidePage(path,type);
+    };
     $scope.back = function () {
         navSvc.back();
     };
@@ -19,7 +23,7 @@ function HomeCtrl($scope,navSvc,$rootScope) {
 
 function NotificationCtrl($scope) {
     $scope.alertNotify = function() {
-        navigator.notification.alert("Sample Alert",function() {console.log("Alert success")},"My Alert","Close");
+        navigator.notification.alert("Sample Alert",null,"My Alert","Close");
     };
     
     $scope.beepNotify = function() {
@@ -37,9 +41,10 @@ function NotificationCtrl($scope) {
 
 function GeolocationCtrl($scope,navSvc,$rootScope) {
     navigator.geolocation.getCurrentPosition(function(position) {
+    	navigator.notification.alert(position.coords.latitude,null,"My Alert","Close");
         $scope.position=position;
         $scope.$apply();
-        },function(e) { console.log("Error retrieving position " + e.code + " " + e.message) });
+        },function(e) {navigator.notification.alert('fuck you',null,"My Alert","Close"); });
 
     $scope.back = function () {
         navSvc.back();
@@ -62,27 +67,6 @@ function CompassCtrl($scope) {
         $scope.$apply();
     },function(e) { console.log("Error finding compass " + e.code) });
 }
-
-function HackerNewsCtrl($scope, $rootScope) {
-
-    // load in data from hacker news unless we already have
-    if (!$rootScope.items) {     
-
-        jx.load('http://api.ihackernews.com/page',function(data){
-            console.log(JSON.stringify(data));
-            $rootScope.items = data.items;
-            $scope.$apply();
-        },'json');
-
-    } else {
-        console.log('data already loaded');
-    }
-
-    $scope.loadItem = function(item) {
-        navigator.notification.alert(item.url,function() {console.log("Alert success")},"My Alert","Close");
-    };
-}
-
 
 function ContactsCtrl($scope) {
     $scope.find = function() {
