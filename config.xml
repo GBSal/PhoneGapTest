@@ -5,7 +5,7 @@
         AngularJS APP using PhoneGap to test the all the feature available.
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+        GB Soft Team.
     </author>
     <feature name="http://api.phonegap.com/1.0/device" />
     <feature name="http://api.phonegap.com/1.0/battery"/>
