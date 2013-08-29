@@ -11,33 +11,58 @@
 
         <link rel="stylesheet" type="text/css" href="css/mobile-nav.css" />
         <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-dark.css">
-        <title>Angular PhoneGap Sample</title>
+        <title>PhoneGap Test</title>
+
+        <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+        <script type="text/javascript" charset="utf-8">
+
+            // Wait for device API libraries to load
+            //
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            var watchID = null;
+
+            // device APIs are available
+            //
+            function onDeviceReady() {
+                // Throw an error if no update is received every 30 seconds
+                var options = { timeout: 30000 };
+                watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+            }
+
+            // onSuccess Geolocation
+            //
+            function onSuccess(position) {
+                var element = document.getElementById('geolocation');
+                element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
+                        'Longitude: ' + position.coords.longitude     + '<br />' +
+                        '<hr />'      + element.innerHTML;
+            }
+
+            // onError Callback receives a PositionError object
+            //
+            function onError(error) {
+                alert('code: '    + error.code    + '\n' +
+                        'message: ' + error.message + '\n');
+            }
+
+        </script>
+
+
     </head>
     
     <body>
         <!-- The following tag is in place of ng-view to use the angular mobile view navigation framework
             https://github.com/ajoslin/angular-mobile-nav
         -->
-        <mobile-view/>
+
 
         <!-- Comment out the following 2 lines to test on the browser-->
         <!--<script type="text/javascript" src="phonegap.js"></script>-->
         <!--<script type="text/javascript" src="js/index.js"></script>-->
-        
-        <!-- In production use min versions -->
-        <script src="lib/jx.min.js"></script>
-        <script src="lib/angular.js"></script>
-        <script src="lib/angular-mobile.js"></script>
-        <script src="lib/mobile-nav.js"></script>
 
-        <script src="js/app.js"></script>
-        <script src="js/services.js"></script>
-        <script src="js/controllers.js"></script>
-        <script src="js/filters.js"></script>
-        <script src="js/directives.js"></script>
+        <p id="geolocation">Watching geolocation...</p>
 
-        <script type="text/javascript">
-            app.initialize();
-        </script>
+
     </body>
 </html>
