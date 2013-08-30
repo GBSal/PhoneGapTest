@@ -57,6 +57,54 @@
                 alert("Msg msg... " + watchID);
                 
             }
+            
+            function checkAccelerometer()
+            {
+                
+                
+                navigator.accelerometer.getCurrentAcceleration(
+                   function(){
+                    
+                     alert('Acceleration X: ' + acceleration.x + '\n' +
+                          'Acceleration Y: ' + acceleration.y + '\n' +
+                          'Acceleration Z: ' + acceleration.z + '\n' +
+                          'Timestamp: '      + acceleration.timestamp + '\n');
+
+                  }, function() {
+                    
+                     alert('onError!');
+
+                    
+                 });
+                
+                
+            }
+
+
+        function showAlert() {
+                navigator.notification.alert(
+                    'You are the winner!',  // message
+                    'Game Over',            // title
+                    'Done'                  // buttonName
+                );
+            }
+
+        // Beep three times
+        //
+        function playBeep() {
+                navigator.notification.beep(3);
+        }
+        
+        // Vibrate for 2 seconds
+        //
+        function vibrate() {
+                navigator.notification.vibrate(2000);
+        }
+
+
+
+
+
 
         </script>
 
@@ -81,6 +129,13 @@
         
         <input type="button" value="Geo Location" onclick="showMsg();"/>
         
+        <input type="button" value="Accelerometer" onclick="checkAccelerometer();"/>
+        
+        <input type="button" value="show Alert" onclick="showAlert();"/>
+        
+        <input type="button" value="Play Beep" onclick="playBeep();"/>
+        
+        <input type="button" value="Vibrate" onclick="vibrate();"/>
 
 
     </body>
