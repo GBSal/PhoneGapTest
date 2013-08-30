@@ -26,13 +26,14 @@
             //
             function onDeviceReady() {
                 // Throw an error if no update is received every 30 seconds
-                var options = { timeout: 30000 };
+                var options = { timeout: 50000 };
                 watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
             }
 
             // onSuccess Geolocation
             //
             function onSuccess(position) {
+                alert("Success got GEO location");
                 var element = document.getElementById('geolocation');
                 element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
                         'Longitude: ' + position.coords.longitude     + '<br />' +
