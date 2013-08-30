@@ -31,9 +31,11 @@
                 <param name="android-package" value="org.apache.cordova.AccelListener" />
         </feature> 
         
-        <feature name="Notification">
+        <!--<feature name="Notification">
                 <param name="android-package" value="org.apache.cordova.Notification" />
-        </feature>
+        </feature>-->
+        
+        <feature name="http://api.phonegap.com/1.0/notification"/>
 
     <!--
         If you do not want any permissions to be added to your app, add the
